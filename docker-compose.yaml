@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: appMonolithShop
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    tty: true
+    environment:
+      - NODE_ENV=development
