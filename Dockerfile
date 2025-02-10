@@ -1,7 +1,8 @@
 # Usar a imagem base do Node.js
 FROM node:lts-alpine3.20
 
-# RUN apt-get update
+# Instalar o SQLite e suas dependências
+RUN apk add --no-cache sqlite sqlite-dev
 
 # Definir o diretório de trabalho dentro do container
 WORKDIR /app
