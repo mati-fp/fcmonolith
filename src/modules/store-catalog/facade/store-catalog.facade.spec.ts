@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize-typescript";
 import StoreCatalogFacadeFactory from "../factory/facade.factory";
-import ProductModel from "../repository/product.model";
+import { ProductModel }from "../repository/product.model";
 
 describe("StoreCatalogFacade test", () => {
   let sequelize: Sequelize;
@@ -28,6 +28,10 @@ describe("StoreCatalogFacade test", () => {
       name: "Product 1",
       description: "Description 1",
       salesPrice: 100,
+      purchasePrice: 50,
+      stock: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
     const result = await facade.find({ id: "1" });
@@ -45,12 +49,20 @@ describe("StoreCatalogFacade test", () => {
       name: "Product 1",
       description: "Description 1",
       salesPrice: 100,
+      purchasePrice: 50,
+      stock: 10,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
     await ProductModel.create({
       id: "2",
       name: "Product 2",
       description: "Description 2",
       salesPrice: 200,
+      purchasePrice: 100,
+      stock: 20,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     });
 
     const result = await facade.findAll();

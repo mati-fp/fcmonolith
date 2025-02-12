@@ -1,28 +1,32 @@
-import { Migrator, createSequelizeInstance } from './migrator';
+import { migrator, createSequelizeInstance } from './migrator';
 import { Sequelize } from 'sequelize-typescript';
 import { QueryInterface } from 'sequelize';
+import { Umzug } from 'umzug';
 
 describe('Migrator', () => {
     let sequelize: Sequelize;
+    let migration: Umzug<any>;
     let queryInterface: QueryInterface;
-    let migrator: Migrator;
 
     beforeEach(async () => {
         // Criar uma nova instância do Sequelize para cada teste
         sequelize = createSequelizeInstance(':memory:');
+        migration = migrator(sequelize);
         queryInterface = sequelize.getQueryInterface();
-        migrator = new Migrator(sequelize);
-        
-        // Não precisamos mais do sync aqui
-        // await sequelize.sync();
+        await migration.up();
     });
 
     afterEach(async () => {
-        await sequelize.close();
+        try {
+            // Revert all migrations at once
+            await migration.down({step: 4});
+        } finally {
+            await sequelize.close();
+        }
     });
 
     test('should run all migrations up', async () => {
-        await migrator.up();
+
         const tables = await queryInterface.showAllTables();
         expect(tables).toContain('products');
         expect(tables).toContain('clients');
@@ -30,12 +34,9 @@ describe('Migrator', () => {
         expect(tables).toContain('invoice_items');
         expect(tables).toContain('transactions');
     });
-
     test('should run all migrations down', async () => {
-        // Primeiro criamos as tabelas
-        await migrator.up();
-        // Depois removemos
-        await migrator.down();
+        // Revert all migrations
+        await migration.down({ step: 4 });
         
         const tables = await queryInterface.showAllTables();
         expect(tables).not.toContain('products');
