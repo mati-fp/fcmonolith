@@ -27,7 +27,6 @@ describe('E2E test for product', () => {
         migration = migrator(sequelize)
         await migration.down({step: 4})
         queryInterface = sequelize.getQueryInterface();
-        console.log(await queryInterface.showAllTables());
         await sequelize.close()
     });
 

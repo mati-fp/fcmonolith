@@ -40,5 +40,5 @@ export default class InvoiceModel extends Model {
     declare updatedAt: Date;
 
     @HasMany(() => InvoiceItemModel)
-    declare items: InvoiceItemModel[];
+    declare items?: InvoiceItemModel[];
 }

@@ -9,6 +9,6 @@ invoiceRoute.get('/:id', async (req: Request, res: Response) => {
         const invoice = await facade.findInvoice({ id: req.params.id });
         res.json(invoice);
     } catch (error) {
-        res.status(404).json({ error: error});
+        res.status(404).json(error);
     }
 });

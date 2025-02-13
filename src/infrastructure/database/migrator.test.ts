@@ -14,6 +14,7 @@ describe('Migrator', () => {
         migration = migrator(sequelize);
         queryInterface = sequelize.getQueryInterface();
         await migration.up();
+        //await sequelize.sync({ alter: { drop: false } });
     });
 
     afterEach(async () => {
