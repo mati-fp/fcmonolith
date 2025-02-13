@@ -27,7 +27,7 @@ describe('E2E test for invoice', () => {
             return 
           }
         migration = migrator(sequelize)
-        await migration.down({step: 4})
+        await migration.down({step: 5})
         await sequelize.close()
     });
 

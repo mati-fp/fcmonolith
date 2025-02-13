@@ -20,7 +20,7 @@ describe('Migrator', () => {
     afterEach(async () => {
         try {
             // Revert all migrations at once
-            await migration.down({step: 4});
+            await migration.down({step: 5});
         } finally {
             await sequelize.close();
         }
@@ -37,7 +37,7 @@ describe('Migrator', () => {
     });
     test('should run all migrations down', async () => {
         // Revert all migrations
-        await migration.down({ step: 4 });
+        await migration.down({step: 5});
         
         const tables = await queryInterface.showAllTables();
         expect(tables).not.toContain('products');
