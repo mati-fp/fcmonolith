@@ -24,8 +24,9 @@ export default class CheckoutRepository implements CheckoutGateway {
             }, {
                 include: [OrderItemModel],
             });
-        } catch (error) {
-            throw error;
+        } catch (err) {
+            const error = err as Error;
+            console.error('Error adding order:', error);
         }
     }
 

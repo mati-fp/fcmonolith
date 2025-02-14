@@ -16,5 +16,11 @@ export default class OrderModel extends Model{
 
     @HasMany(() => OrderItemModel)
     declare orderItems: OrderItemModel[];
+
+    @Column({allowNull: false, field: "created_at"})
+    declare createdAt: Date;
+
+    @Column({allowNull: false, field: "updated_at"})
+    declare updatedAt: Date;
     
 }

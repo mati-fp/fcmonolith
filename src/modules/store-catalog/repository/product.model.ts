@@ -16,18 +16,18 @@ export class ProductModel extends Model {
   @Column({ allowNull: false })
   declare description: string;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: 'purchase_price' })
   declare purchasePrice: number;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: 'sales_price' })
   declare salesPrice: number;
 
   @Column({ allowNull: false })
   declare stock: number;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: 'created_at' })
   declare createdAt: Date;
 
-  @Column({ allowNull: false })
+  @Column({ allowNull: false, field: 'updated_at' })
   declare updatedAt: Date;
 }
